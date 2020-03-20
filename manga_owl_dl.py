@@ -1,22 +1,17 @@
 from requests import get
-from pyquery import PyQuery
-from lxml.html import parse
-from html.parser import HTMLParser
 from bs4 import BeautifulSoup
-from fpdf import FPDF
 import os
+import shutil
 import img2pdf
-from flask import Flask, request, jsonify, json, abort
-from flask_cors import CORS, cross_origin
 import sys
-
 
 #url_ = "https://www.porncomix.info/dna-2-jabcomix/"
 url_ = sys.argv[1]
 r = get(url_)
 title = sys.argv[2]
 
-directory = '/home/karan/Downloads/' + title + '/'
+directory = os.getcwd() + '/' + title + '/'
+
 os.mkdir(directory)
 
 html = BeautifulSoup(r.content,"html.parser")
@@ -37,9 +32,9 @@ for img_page in html.find_all("img", class_="owl-lazy"):
             
     c = get(img_page.attrs['data-src'])
         
-    img_arr.append('/home/karan/Downloads/' + title + '/' + title + (count_str) + ".jpg")
+    img_arr.append(directory + title + (count_str) + ".jpg")
         
-    with open('/home/karan/Downloads/' + title + '/' + title + (count_str) + ".jpg", 'wb') as f:
+    with open( directory + title + (count_str) + ".jpg", 'wb') as f:
         f.write(c.content)
         print(title + (count_str))
             
@@ -48,3 +43,4 @@ print(img_arr)
 
 with open("Comix/" + title + ".pdf", "wb") as f:
     f.write(img2pdf.convert([i for i in img_arr if i.endswith(".jpg")]))
+

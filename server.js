@@ -1,9 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-var fs = require('fs');
+const path = require('path')
 
-//const routes = Routes(app)
+var fs = require('fs');
 
 global.path = require('path');
 
@@ -16,18 +16,9 @@ app.set('etag', false);
 
 console.log('Server started')
 
-app.get('/', (req, res) => {
-    var files = fs.readdirSync('/home/karan/Documents/GitWorkSpace/Comix_Cloner/Comix/');
-    var _files = []
-    files.forEach(element => {
-        _files.push("http://192.168.31.167:1996/" + element)
-    });
-    res.json(_files);
-})
-
 app.get('/files', (req, res) => {
     var html = ` <head></head><body>`
-    var files = fs.readdirSync('/home/karan/Documents/GitWorkSpace/Comix_Cloner/Comix/');
+    var files = fs.readdirSync(__dirname + '/Comix/');
 
     files.forEach(element => {
         var lnk = '<a href="/' + element + '">' + element + '</a><br>'
@@ -37,5 +28,3 @@ app.get('/files', (req, res) => {
     html += '</body>'
     res.send(html);
 })
-
-//http://192.168.31.167:1996
