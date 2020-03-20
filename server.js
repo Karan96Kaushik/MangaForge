@@ -30,10 +30,12 @@ app.get('/files', (req, res) => {
     var files = fs.readdirSync('/home/karan/Documents/GitWorkSpace/Comix_Cloner/Comix/');
 
     files.forEach(element => {
-        var lnk = '<a href="http://192.168.31.167:1996/' + element + '">' + element + '</a><br>'
+        var lnk = '<a href="/' + element + '">' + element + '</a><br>'
         html += lnk
     });
 
     html += '</body>'
     res.send(html);
 })
+
+//http://192.168.31.167:1996
