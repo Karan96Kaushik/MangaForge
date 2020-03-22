@@ -29,7 +29,7 @@ content = driver.page_source
 
 print(content)
 
-#r = get(url_)
+r = get(url_, headers)
 
 title = url_.split('/')[len(url_.split('/')) - 4] + '_' + url_.split('/')[len(url_.split('/')) - 3] + '_' + url_.split('/')[len(url_.split('/')) - 2]
 #title = sys.argv[2]
@@ -51,18 +51,18 @@ count = 0
 
 img_arr = []
 
-for img_page in html.find_all("span", class_="single-comic-page"):
+for img_page in html.find_all("video", class_="single-comic-page"):
     print(img_page)
-    img = img_page.find_all("img")[0]
+    img = img_page.find_all("")[0]
     count = count + 1
-    print(img.attrs['src'])
+    print(img_page.attrs['src'])
     
     if count < 10:
         count_str = "0" + str(count)
     else:
         count_str = str(count)
             
-    c = get(img.attrs['src'])
+    c = get(img_page.attrs['src'])
         
     img_arr.append(directory + title + (count_str) + ".jpg")
         

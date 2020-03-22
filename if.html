@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<body>
+    <h3>Links</h3>
+
+    <form action="/down" method="get">
+        <input type="text" id="fname" name="fname"><br>
+        <input type="submit" id="fname" name="fname" value="Go!"><br>
+        </form>
+
+        <form action="/clip" method="get">
+        <input type="submit" id="fname" name="fname" value="Use Copied"><br>
+        </form> 
+
+    <h3>Files</h3>
+    <table id="excelDataTable" border="1" >
+    </table>
+</body>
+
+<script>
+
+    var myList = { "name": "abc", "age": 50,"age": 50,"age": 50 };
+
+    function buildHtmlTable(selector) {
+        var columns = Object.keys(myList)
+        console.log(columns);
+
+        for (var i = 0; i < columns.length; i++) {
+            var row$ = $('<tr/>');
+            row$.append($('<td/>').html( '&nbsp&nbsp&nbsp' + columns[i] + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' ) );
+            row$.append($('<td/>').html( '&nbsp&nbsp&nbsp' + myList[columns[i]] + '&nbsp&nbsp&nbsp' ));
+            $(selector).append(row$);
+        }
+    }
+
+    function kill(selector) {
+        try {
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+            document.getElementById(selector).deleteRow(0);   
+        } catch (error) {
+            
+        }}
+    setInterval(() => {
+        $.getJSON("/vids", function (data) {
+            console.log(data);
+            kill('excelDataTable')
+            myList = data;
+            buildHtmlTable('#excelDataTable');
+        });
+    }, 1000);
+
+</script>
