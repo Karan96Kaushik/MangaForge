@@ -17,6 +17,7 @@
 1. Use **http://0.0.0.0:3333/link** to send and monitor download jobs
 1. Use **http://0.0.0.0:1996/files** to access static files
 1. Use **http://0.0.0.0:1996/dex.html** to access gallery
+1. Use **http://0.0.0.0:3333/prog** to access gallery
 1. Use **python3 efukt.py <url> <folder>**
 
 ## Files & Folders
@@ -25,3 +26,4 @@
 1. **downloader.py** : Downloader script
 1. **server.js** : Static file server
 1. **efukt.py** : Continous Efukt vid downloader
+1. **vidDL.py** : Vid downloader module (to be imported)
