@@ -96,7 +96,55 @@ def sel(_url):
     elif url.split('.org')[0] == 'https://hentaihaven':
         _thread.start_new_thread(dl_haven, (url, ))
         pass
+    elif url.split('.com')[0] == 'https://www.aznude':
+        _thread.start_new_thread(dl_az, (url, ))
+        pass
     return
+
+def dl_az(url):
+    url_ = url
+    r = get(url_)
+
+    html = BeautifulSoup(r.content, "html.parser")
+    name = html.find_all("title")[0].text
+    directory = os.getcwd() + '/Comix/' + name + '/'
+    try:
+        os.mkdir(directory)
+    except:
+        print()
+
+    count = 0
+    for img_page in html.find_all("a", lightbox=True):
+        clip_name = img_page.attrs['lightbox'].split('<small>')[0]
+
+        count = count + 1
+
+        try:
+            print('http://cdn' + img_page.attrs['href'].split('//cdn')[1])
+            b = get('http://cdn' + img_page.attrs['href'].split('//cdn')[1])
+            ext  = img_page.attrs['href'].split('.')[len(img_page.attrs['href'].split('.')) - 1]
+
+            with open(directory + clip_name + str(count) + '.' + ext, 'wb') as f:
+                f.write(b.content)
+                print(clip_name + str(count) + '.' + ext)
+        except:
+            a = 0
+            print('Err ' + clip_name + str(count), img_page)
+
+    for vid_link in html.find_all("a", lightbox=True, class_="video"):
+        count = count + 1
+        clip_name = vid_link.attrs['lightbox'].split('<small>')[0]
+        folder = directory + name + '/'
+
+        b = get('https://www.aznude.com' + vid_link.attrs['href'])
+        print(vid_link.attrs['href'])
+        try:
+            vid_url = BeautifulSoup(b.content,"html.parser").find_all("ul", class_="sorting-buttons")[0].find_all("a", href=True)[0].attrs['href']
+            res = get('https:' + vid_url)
+            with open(directory + clip_name + str(count) + ".mp4", 'wb') as f:
+                f.write(res.content)
+        except:
+            a = 0
 
 def dl_allporncomics(url):
     ext = '.gif'
