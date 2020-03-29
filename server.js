@@ -23,7 +23,7 @@ app.get('/files', (req, res) => {
     var files = fs.readdirSync(__dirname + '/Comix/');
 
     files.forEach(element => {
-        var lnk = '<a href="/' + element + '">' + element + '</a><br>'
+        var lnk = '<a href="/Comix/' + element + '">' + element + '</a><br>'
         html += lnk
     });
 
@@ -48,7 +48,7 @@ app.get('/jsonvids', (req, res) => {
     tree_vids[req.query.folder].forEach(el => {
         vids. push({
             title: el,
-            href: '/' + req.query.folder + '/' + el,
+            href: '/Comix/' + req.query.folder + '/' + el,
             type: 'video/mp4',
             //poster: 'https://i.imgur.com/MUSw4Zu.jpg'
         })
@@ -71,7 +71,7 @@ function catalogger() {
 
 
     filesfolders.forEach(el => {
-        if(el.endsWith('.jpg') || el.endsWith('.pdf') || el.endsWith('.png') || el.endsWith('.mp4') || el.endsWith('.ico') || el.endsWith('.sql')) {
+        if(el.endsWith('.jpg') || el.endsWith('.html') || el.endsWith('.pdf') || el.endsWith('.png') || el.endsWith('.mp4') || el.endsWith('.ico') || el.endsWith('.sql')) {
         } else {
             folders.push(el)
         }

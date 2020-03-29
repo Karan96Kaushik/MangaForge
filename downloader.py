@@ -127,9 +127,8 @@ def dl_az(url):
             with open(directory + clip_name + str(count) + '.' + ext, 'wb') as f:
                 f.write(b.content)
                 print(clip_name + str(count) + '.' + ext)
-        except:
-            a = 0
-            print('Err ' + clip_name + str(count), img_page)
+        except Exception as ex:
+            print(ex)
 
     for vid_link in html.find_all("a", lightbox=True, class_="video"):
         count = count + 1

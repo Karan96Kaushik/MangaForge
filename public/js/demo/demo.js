@@ -29,13 +29,13 @@ function _carousel(__folder) {
 		// Add the demo images as links with thumbnails to the page:
 		$.each(result, function (index, photo) {
 			$('<a/>')
-				.append($('<img>').prop('src', '/' + encodeURIComponent(__folder) + '/' + encodeURIComponent(photo)))
+				.append($('<img>').prop('src', '/Comix/' + encodeURIComponent(__folder) + '/' + encodeURIComponent(photo)))
 				//.prop('href', 'localhost:1996/' + result)
 				//.prop('title', photo.title)
 				.attr('data-gallery', '')
 				.appendTo(linksContainer)
 			carouselLinks.push({
-				href: '/' + encodeURIComponent(__folder) + '/' + encodeURIComponent(photo),
+				href: '/Comix/' + encodeURIComponent(__folder) + '/' + encodeURIComponent(photo),
 			})
 		})
 		// Initialize the Gallery as image carousel:
