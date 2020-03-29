@@ -9,7 +9,7 @@ import shutil
 import img2pdf
 import sys
 import io
-import tkinter as tk
+#import tkinter as tk
 import _thread
 import urllib.request
 import pyperclip
@@ -25,7 +25,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def hello_world():
     req = request.args
     sel(req.get('fname'))
-    return redirect('/link')
+    return redirect('/prog')
 
 @app.route('/clip', methods=methods)
 def hell():
