@@ -1,0 +1,17 @@
+{
+  "name": "Comix Download",
+  "description": "Comix",
+  "version": "1.2",
+  "background": {
+    "scripts": ["background.js", "jquery.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+      "default_title": "Download Comix",
+      "default_icon": "comic16.png"
+  },
+  "manifest_version": 2
+}

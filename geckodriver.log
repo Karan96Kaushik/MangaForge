@@ -1,0 +1,48 @@
+1586721179731	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "window-size=400,600" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileAsLrzp"
+1586721185834	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1586721187835	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1586721187835	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1586721187835	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1586721187836	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1586721198317	Marionette	INFO	Listening on port 32949
+1586721198396	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: UnknownError: The operation failed for reasons unrelated to the database itself and not covered by any other error code.
+1586721241346	Marionette	INFO	Stopped listening on port 32949
+1586721246300	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "window-size=400,600" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileVa5pl6"
+1586721248120	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1586721250291	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1586721250291	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1586721250292	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1586721250292	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1586721257087	Marionette	INFO	Listening on port 34087
+1586721257126	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://devtools/client/framework/toolbox.js, line 1903: TypeError: currentPanel is undefined
+JavaScript error: resource://devtools/client/framework/toolbox.js, line 1903: TypeError: currentPanel is undefined
+TA__pauseAndRespond threw an exception: [Exception... "Security Manager vetoed action"  nsresult: "0x80570027 (NS_ERROR_XPC_SECURITY_MANAGER_VETO)"  location: "JS frame :: resource://devtools/server/actors/utils/event-loop.js :: postNest :: line 171"  data: no]
+Stack: postNest@resource://devtools/server/actors/utils/event-loop.js:171:31
+enter@resource://devtools/server/actors/utils/event-loop.js:89:10
+_pushThreadPause@resource://devtools/server/actors/thread.js:262:15
+_pauseAndRespond@resource://devtools/server/actors/thread.js:820:12
+onDebuggerStatement@resource://devtools/server/actors/thread.js:1756:17
+@https://maharerait.mahaonline.gov.in/searchlist/search:103:9
+j@https://maharerait.mahaonline.gov.in/Scripts/jquery-1.11.1.min.js:2:27244
+fireWith@https://maharerait.mahaonline.gov.in/Scripts/jquery-1.11.1.min.js:2:28057
+ready@https://maharerait.mahaonline.gov.in/Scripts/jquery-1.11.1.min.js:2:29891
+J@https://maharerait.mahaonline.gov.in/Scripts/jquery-1.11.1.min.js:2:30257
+Line: 171, column: 0
+console.error: ({})
+JavaScript error: , line 0: UnknownError: The operation failed for reasons unrelated to the database itself and not covered by any other error code.
+1586721630657	Marionette	INFO	Stopped listening on port 34087
+1586721675940	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "window-size=400,600" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofiledHIO02"
+1586721677224	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1586721679048	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1586721679048	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1586721679049	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1586721679049	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1586721683532	Marionette	INFO	Listening on port 40087
+1586721683577	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: UnknownError: The operation failed for reasons unrelated to the database itself and not covered by any other error code.
+1586721896429	Marionette	INFO	Stopped listening on port 40087

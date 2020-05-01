@@ -2,20 +2,26 @@ from PIL import Image
 from requests import get
 from bs4 import BeautifulSoup
 from time import sleep
-from flask import Flask, request, jsonify, json, abort, redirect, send_file
+from flask import Flask, request, jsonify, json, abort, redirect, send_file, logging
 from flask_cors import CORS, cross_origin
 import os
 import shutil
 import img2pdf
 import sys
 import io
-#import tkinter as tk
 import _thread
 import urllib.request
 import pyperclip
 import subprocess
+from logging.handlers import RotatingFileHandler
+
+app = Flask(__name__)
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 from aznude import dl_az
+from m_owl import dl
 
 save_location = os.getcwd() + '/Comix/'
 
@@ -31,6 +37,12 @@ def hello_world():
 	req = request.args
 	sel(req.get('fname'))
 	return redirect('/link')
+
+@app.route('/jsondown', methods=methods)
+def down_json():
+	url = (request.form['fname'] + '')
+	resp = sel(url)
+	return resp
 
 @app.route('/clip', methods=methods)
 def hell():
@@ -130,7 +142,8 @@ def s():
  
 
 def sel(_url):
-	#dl(driver.current_url)
+	resp = ''
+
 	print('SEL', _url)
 	url = ''
 	if(_url == ''):
@@ -138,22 +151,33 @@ def sel(_url):
 	else:
 		url = _url
 	
-	if url.split('.com')[0] == 'https://allporncomic':
+	if url.split('.us')[0] == 'http://chessmoba':
+		_thread.start_new_thread(dl, (url, ))
+		resp = 'Manga Owl'
+		pass
+	elif url.split('.com')[0] == 'https://allporncomic':
 		_thread.start_new_thread(dl_allporncomics, (url, ))
+		resp = 'APC'
 		pass
 	elif url.split('.com')[0] == 'https://sexporncomics':
 		_thread.start_new_thread(dl_sexporncomics, (url, ))
+		resp = 'SPC'
 		pass
 	elif url.split('.info')[0] == 'https://www.porncomix':
 		_thread.start_new_thread(dl_porncomix, (url, ))
+		resp = 'PC'
 		pass
 	elif url.split('.org')[0] == 'https://hentaihaven':
 		_thread.start_new_thread(dl_haven, (url, ))
+		resp = 'HH'
 		pass
 	elif url.split('.com')[0] == 'https://www.aznude':
 		_thread.start_new_thread(dl_az, (url, ))
+		resp = 'AZ'
 		pass
-	return
+	else:
+		resp = 'Unknown Source'
+	return resp
 
 def dl_allporncomics(url):
 	#ext = '.gif'
@@ -190,13 +214,13 @@ def dl_allporncomics(url):
 			count_str = "0" + str(count)
 		else:
 			count_str = str(count)
-
-		c = get(img_link)
+		#print(img_link.strip())
+		c = get(img_link.strip())
 		ext = img_link.split('.')[-1]
 
 		with open(directory + title + (count_str) + ext, 'wb') as f:
 			f.write(c.content)
-			print(title + (count_str))
+			print(title + ' ' + (count_str))
 		
 		Image.open(directory + title + (count_str) + ext).convert('RGB').save(directory + title + (count_str) + '.jpg')
 		img_arr.append(directory + title + (count_str) + '.jpg')

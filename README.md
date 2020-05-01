@@ -20,6 +20,10 @@
 1. Use **http://0.0.0.0:3333/prog** to access gallery
 1. Use **python3 efukt.py <url> <folder>**
 
+## Installation
+
+1. Instead of using "pip3 install Pillow", use "sudo apt install python3-pillow"
+
 ## Files & Folders
 
 1. **Comix/** : Static File storage
