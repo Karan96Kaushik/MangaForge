@@ -17,8 +17,8 @@ from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+#log = logging.getLogger('werkzeug')
+#log.setLevel(logging.ERROR)
 
 from aznude import dl_az
 from m_owl import dl
