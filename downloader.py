@@ -155,6 +155,10 @@ def sel(_url):
 		_thread.start_new_thread(dl, (url, ))
 		resp = 'Manga Owl'
 		pass
+	elif url.split('.com')[0] == 'https://mangaowl':
+		_thread.start_new_thread(dl, (url, ))
+		resp = 'Manga Owl'
+		pass
 	elif url.split('.com')[0] == 'https://allporncomic':
 		_thread.start_new_thread(dl_allporncomics, (url, ))
 		resp = 'APC'
