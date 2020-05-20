@@ -14,6 +14,7 @@ import _thread
 import urllib.request
 import pyperclip
 import subprocess
+import global_vars
 
 app = Flask(__name__)
 
@@ -33,6 +34,10 @@ app = Flask(__name__)
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+@app.route('/status', methods=methods)
+def hello_wo():
+	return jsonify(global_vars.owl_pg_count)
 
 @app.route('/down', methods=methods)
 def hello_world():
@@ -149,6 +154,8 @@ def serve_file(path):
 def s():
 	return send_file('if.html')
 
+owl_pg_count = {}
+
 def sel(_url):
 	resp = ''
 
@@ -159,11 +166,23 @@ def sel(_url):
 	else:
 		url = _url
 	
-	if url.split('.us')[0] == 'http://chessmoba':
+	if url.split('$$')[1] != '':
+		_thread.start_new_thread(dl, (url.split('$$')[1], ))
+		resp = 'Manga Owl'
+		pass
+	elif url.split('.us')[0] == 'http://chessmoba':
+		_thread.start_new_thread(dl, (url, ))
+		resp = 'Manga Owl'
+		pass
+	elif url.split('.us')[0] == 'https://chessmoba':
 		_thread.start_new_thread(dl, (url, ))
 		resp = 'Manga Owl'
 		pass
 	elif url.split('.com')[0] == 'https://mangaowl':
+		_thread.start_new_thread(dl, (url, ))
+		resp = 'Manga Owl'
+		pass
+	elif url.split('.com')[0] == 'https://thefashion101':
 		_thread.start_new_thread(dl, (url, ))
 		resp = 'Manga Owl'
 		pass
@@ -192,7 +211,7 @@ def sel(_url):
 		resp = 'AZ'
 		pass
 	else:
-		resp = 'Unknown Source'
+		resp = 'Unknown Source, Dowload Failed for "' + _url + '"'
 	return resp
 
 def dl_allporncomics(url):

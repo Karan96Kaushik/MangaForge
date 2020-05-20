@@ -4,4 +4,4 @@
 *.mp4
 *.sql
 Comix/*
-
+__pycache__/*
