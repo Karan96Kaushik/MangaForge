@@ -5,6 +5,7 @@ import shutil
 import img2pdf
 import sys
 from PIL import Image
+import urllib.parse
 
 def dl(url_):
     r = get(url_)
@@ -23,7 +24,9 @@ def dl(url_):
     img_arr = []
 
     
-    ch_name = html.find("img", class_="owl-lazy").attrs['data-src'].split('/')[-2]
+    #ch_name = html.find("img", class_="owl-lazy").attrs['data-src'].split('/')[-2]
+    ch_ = html.find("iframe", id="readerContinue").attrs["src"]
+    ch_name = (urllib.parse.parse_qs(ch_)["chapterName"][0])
     print(ch_name)
 
     directory = os.getcwd() + '/Comix/Comix/Manga/' + title + '/' + ch_name + '/'
@@ -51,7 +54,7 @@ def dl(url_):
         
         with open(im_name, 'wb') as f:
             f.write(c.content)
-            print(title + (count_str))
+            print(im_name)
 
         im = Image.open(im_name)
         if(im.mode != 'RGB'):
@@ -63,7 +66,7 @@ def dl(url_):
 
     with open(manga_name + '_'.join(title.split()) + '_' + ch_name + ".pdf", "wb") as f:
         f.write(img2pdf.convert([i for i in img_arr if i.endswith(".jpg")]))
-        print('PDF Generated for', '_'.join(title.split()) + '_' + ch_name + ".pdf")
+        print('PDF Generated for', '_'.join(title.split()) + '_' + '_'.join(ch_name.split()) + ".pdf")
 
     shutil.rmtree(directory)
 

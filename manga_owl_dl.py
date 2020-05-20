@@ -40,7 +40,6 @@ for img_page in html.find_all("img", class_="owl-lazy"):
             
 print(img_arr)
 
-
 with open("Comix/" + title + ".pdf", "wb") as f:
     f.write(img2pdf.convert([i for i in img_arr if i.endswith(".jpg")]))
 

@@ -1,0 +1,7 @@
+from xnxx import page as xnxx
+
+file1 = open('myfile.txt', 'r') 
+Lines = file1.readlines() 
+
+for line in Lines:
+    print(line)

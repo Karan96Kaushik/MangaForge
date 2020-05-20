@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from time import sleep
 from flask import Flask, request, jsonify, json, abort, redirect, send_file, logging
 from flask_cors import CORS, cross_origin
+from logging.handlers import RotatingFileHandler
 import os
 import shutil
 import img2pdf
@@ -13,7 +14,6 @@ import _thread
 import urllib.request
 import pyperclip
 import subprocess
-from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
 
@@ -22,6 +22,8 @@ app = Flask(__name__)
 
 from aznude import dl_az
 from m_owl import dl
+from xnxx import page as xnxx
+from owl_chaps import get_chaps
 
 save_location = os.getcwd() + '/Comix/'
 
@@ -35,8 +37,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/down', methods=methods)
 def hello_world():
 	req = request.args
-	sel(req.get('fname'))
-	return redirect('/link')
+	resp = sel(req.get('fname'))
+	return jsonify([resp])
 
 @app.route('/jsondown', methods=methods)
 def down_json():
@@ -49,6 +51,13 @@ def hell():
 	req = request.args
 	sel('')
 	return redirect('/link')
+
+@app.route('/anime_list', methods=methods)
+def chaps():
+	req = request.args
+	print(req["url"])
+	print(get_chaps(req["url"]))
+	return jsonify(get_chaps(req["url"]))
 
 @app.route('/vids', methods=methods)
 def vids():
@@ -139,7 +148,6 @@ def serve_file(path):
 @app.route('/prog', methods=['GET'])
 def s():
 	return send_file('if.html')
- 
 
 def sel(_url):
 	resp = ''
@@ -158,6 +166,10 @@ def sel(_url):
 	elif url.split('.com')[0] == 'https://mangaowl':
 		_thread.start_new_thread(dl, (url, ))
 		resp = 'Manga Owl'
+		pass
+	elif url.split('.com')[0] == 'https://xnxx':
+		_thread.start_new_thread(xnxx, (url,"XNXX", ))
+		resp = 'xnxx'
 		pass
 	elif url.split('.com')[0] == 'https://allporncomic':
 		_thread.start_new_thread(dl_allporncomics, (url, ))
