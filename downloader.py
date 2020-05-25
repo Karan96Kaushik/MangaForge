@@ -167,7 +167,7 @@ def sel(_url):
 	else:
 		url = _url
 	
-	if url.split('$$')[1] != '':
+	if url.split('$$')[0] == '':
 		_thread.start_new_thread(dl, (url.split('$$')[1], ))
 		resp = 'Manga Owl'
 		pass
