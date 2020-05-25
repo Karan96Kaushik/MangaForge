@@ -14,6 +14,7 @@ import _thread
 import urllib.request
 import pyperclip
 import subprocess
+
 import global_vars
 
 app = Flask(__name__)
@@ -37,7 +38,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/status', methods=methods)
 def hello_wo():
-	return jsonify(global_vars.owl_pg_count)
+	return jsonify(global_vars.get_status())
 
 @app.route('/down', methods=methods)
 def hello_world():

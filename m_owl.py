@@ -39,7 +39,7 @@ def dl(url_):
     except:
         pass
 
-    global_vars.owl_pg_count[ title + ' - ' + ch_name ] = [0, 1, '', started]
+    global_vars.update_status((title + ' - ' + ch_name), [0, 1, '', started])
 
     # global_vars.owl_pg_count['_'.join(title.split()) + '_' + '_'.join(ch_name.split()) + ".pdf"] = 0
     im_pages = html.find_all("img", class_="owl-lazy")
@@ -73,7 +73,7 @@ def dl(url_):
 
         im.save(im_name)
 
-        global_vars.owl_pg_count[ title + ' - ' + ch_name ] = [count, total_pgs, rel_location + '_'.join(title.split()) + '_' + ch_name + ".pdf", started]
+        global_vars.update_status( (title + ' - ' + ch_name), [count, total_pgs, rel_location + '_'.join(title.split()) + '_' + ch_name + ".pdf", started])
     
     #print(img_arr)
 
