@@ -62,7 +62,7 @@ def get_vid_link(url):
     r = get(url)
 
     html = BeautifulSoup(r.content, "html.parser")
-
+    # print(html)
     title = html.find("title").text.strip().split("Watch ")[1].split("at gogoanime")[0]
     frame = html.find_all("iframe")[0].attrs["src"]
 
@@ -80,7 +80,7 @@ def get_vid_link(url):
     vid_src = r[vid_src_start: vid_src_end]
 
     return {
-        "name": title,
+        "name": title.strip(),
         "link": vid_src
         }
 
@@ -98,7 +98,9 @@ def eps(url):
 
     ep_list = html.find("ul", id="episode_related")
     eps = ep_list.find_all("li")
+    anime_name = html.find("div", class_="anime_info_body").find("h1").text.strip()
 
+    print(anime_name)
     eps_array = []
     # global eps_array
 
@@ -108,7 +110,9 @@ def eps(url):
 
         eps_array.append({
             "value":link,
-            "label":name 
+            "label":name,
+            "anime": anime_name,
+            "anime_url": url
             })
 
     return eps_array
