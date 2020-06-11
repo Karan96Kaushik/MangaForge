@@ -19,8 +19,8 @@ import global_vars
 
 app = Flask(__name__)
 
-#log = logging.getLogger('werkzeug')
-#log.setLevel(logging.ERROR)
+# log = logging.getLogger('werkzeug')
+# log.setLevel(logging.ERROR)
 
 from aznude import dl_az
 from m_owl import dl
@@ -116,6 +116,31 @@ def jsonvids():
 		break
 	
 	return jsonify(files)
+
+##	GOGO Anime
+
+from gogoanime import eps, gogo_search, get_vid_link
+
+@app.route('/gogo_eps', methods=methods)
+def gogos():
+	req = request.args
+	print(req["url"])
+	# print(get_chaps(req["url"]))
+	return jsonify(eps(req["url"]))
+
+@app.route('/gogo_search', methods=methods)
+def gogosearch():
+	req = request.args
+	print(req["string"])
+	# print(get_chaps(req["url"]))
+	return jsonify(gogo_search(req["string"]))
+
+@app.route('/gogo_video', methods=methods)
+def gogovid():
+	req = request.args
+	print(req["url"])
+	# print(get_chaps(req["url"]))
+	return jsonify([ get_vid_link(req["url"]) ])
 
 
 @app.route('/link', methods=methods)
