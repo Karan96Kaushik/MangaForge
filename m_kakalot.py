@@ -1,0 +1,89 @@
+from requests import get
+from bs4 import BeautifulSoup
+import os
+import shutil
+import img2pdf
+import sys
+from PIL import Image
+import urllib.parse
+import global_vars
+from datetime import datetime
+
+def dl(url_):
+    r = get(url_)
+
+    html = BeautifulSoup(r.content,"html.parser")
+    ch_name = html.find('title').text.split(" - Mangaka")[0]
+    title = html.find("div", class_="breadcrumb breadcrumbs bred_doc").find_all("span")[4].text.strip()    
+    manga_name = os.getcwd() + '/Comix/Comix/Manga/' + title + '/'
+    rel_location = '/Comix/Comix/Manga/' + title + '/'
+    started = datetime.now().timestamp()
+
+    try:
+        os.mkdir(manga_name)
+    except Exception as e:
+        # print("Err", e)
+        pass
+
+    count = 0
+
+    img_arr = []
+
+    #ch_name = html.find("img", class_="owl-lazy").attrs['data-src'].split('/')[-2]
+    # ch_name = (urllib.parse.parse_qs(ch_)["chapterName"][0])
+    
+    print(ch_name)
+
+    directory = os.getcwd() + '/Comix/Comix/Manga/' + title + '/' + ch_name + '/'
+
+    try:
+        os.mkdir(directory)
+    except:
+        # print("Err", e)
+        pass
+
+    global_vars.update_status((title + ' - ' + ch_name), [0, 1, '', started])
+
+    # global_vars.owl_pg_count['_'.join(title.split()) + '_' + '_'.join(ch_name.split()) + ".pdf"] = 0
+    im_pages = html.find("div", id="vungdoc").find_all("img")
+
+    total_pgs = len(im_pages)
+
+    for img_page in im_pages:
+        #print(img_page)
+        count = count + 1
+        
+        #print(img_page.attrs['data-src'])
+        
+        if count < 10:
+            count_str = "0" + str(count)
+        else:
+            count_str = str(count)
+        
+        c = get(img_page.attrs['src'])
+
+        im_name = directory + title + ch_name + (count_str) + ".jpg"
+        
+        img_arr.append(im_name)
+        
+        with open(im_name, 'wb') as f:
+            f.write(c.content)
+            print(im_name)
+
+        # im = Image.open(im_name)
+        # if(im.mode != 'RGB'):
+        #     im = im.convert(mode='RGB')
+
+        # im.save(im_name)
+
+        global_vars.update_status( (title + ' - ' + ch_name), [count, total_pgs, rel_location + '_'.join(title.split()) + '_' + ch_name + ".pdf", started])
+    
+    #print(img_arr)
+
+    with open(manga_name + '_'.join(title.split()) + '_' + ch_name + ".pdf", "wb") as f:
+        f.write(img2pdf.convert([i for i in img_arr if i.endswith(".jpg")]))
+        print('PDF Generated for', '_'.join(title.split()) + '_' + '_'.join(ch_name.split()) + ".pdf")
+
+    shutil.rmtree(directory)
+
+# dl('https://mangakakalot.com/chapter/vp922807/chapter_1')

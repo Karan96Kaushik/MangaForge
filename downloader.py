@@ -24,6 +24,7 @@ app = Flask(__name__)
 
 from aznude import dl_az
 from m_owl import dl
+import m_kakalot
 from xnxx import page as xnxx
 from owl_chaps import get_chaps
 
@@ -211,6 +212,10 @@ def sel(_url):
 	elif url.split('.com')[0] == 'https://thefashion101':
 		_thread.start_new_thread(dl, (url, ))
 		resp = 'Manga Owl'
+		pass
+	elif url.split('.com')[0] == 'https://mangakakalot':
+		_thread.start_new_thread(m_kakalot.dl, (url, ))
+		resp = 'Manga Kakalot'
 		pass
 	elif url.split('.com')[0] == 'https://xnxx':
 		_thread.start_new_thread(xnxx, (url,"XNXX", ))
