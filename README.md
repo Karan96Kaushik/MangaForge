@@ -23,6 +23,8 @@
 ## Installation
 
 1. Instead of using "pip3 install Pillow", use "sudo apt install python3-pillow"
+2. Install modules in requirements.txt
+3. Create cache and Comix folders
 
 ## Files & Folders
 

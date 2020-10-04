@@ -368,11 +368,12 @@ def dl_porncomix(url):
 
 	img_arr = []
 
-	try:
+	if True:
+	# try:
 		title = html.find_all("title")[0].text
 		print(title)
-	except:
-		print()
+	# except:
+		pass
 
 	directory = save_location + '/cache/' + title + '/'
 

@@ -5,3 +5,4 @@
 *.sql
 Comix/*
 __pycache__/*
+pyenv/
