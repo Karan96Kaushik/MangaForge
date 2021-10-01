@@ -31,5 +31,4 @@
 1. **Comix/** : Static File storage
 1. **downloader.py** : Downloader script
 1. **server.js** : Static file server
-1. **efukt.py** : Continous Efukt vid downloader
 1. **vidDL.py** : Vid downloader module (to be imported)
