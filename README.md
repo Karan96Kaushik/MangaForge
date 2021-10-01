@@ -1,4 +1,4 @@
-# Comix Cloner Server
+# Manga Forge
 
 ## Features
 
