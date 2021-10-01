@@ -9,12 +9,14 @@ import urllib.parse
 import global_vars
 from datetime import datetime
 
+base = "https://eggporncomics.com"
+
 def dl(url_):
     r = get(url_)
 
     html = BeautifulSoup(r.content,"html.parser")
-    ch_name = html.find('title').text.split(" - ")[0]
-    title = html.find("div", class_="panel-breadcrumb").find_all("a")[1].text.strip().split(sep=" - ")[0]
+    title = html.find('title').text.split("|")[0]
+    # title = html.find("title", class_="panel-breadcrumb").find_all("a")[1].text.strip().split(sep=" - ")[0]
     print(title)
     manga_name = os.getcwd() + '/Comix/Manga/' + title + '/'
     rel_location = '/Comix/Manga/' + title + '/'
@@ -33,9 +35,9 @@ def dl(url_):
     #ch_name = html.find("img", class_="owl-lazy").attrs['data-src'].split('/')[-2]
     # ch_name = (urllib.parse.parse_qs(ch_)["chapterName"][0])
     
-    print(ch_name)
+    # print(ch_name)
 
-    directory = os.getcwd() + '/Comix/Manga/' + title + '/' + ch_name + '/'
+    directory = os.getcwd() + '/Comix/Manga/' + title + '/'
 
     try:
         os.mkdir(directory)
@@ -43,31 +45,33 @@ def dl(url_):
         # print("Err", e)
         pass
 
-    global_vars.update_status((title + ' - ' + ch_name), [0, 1, '', started])
+    global_vars.update_status((title), [0, 1, '', started])
 
     # global_vars.owl_pg_count['_'.join(title.split()) + '_' + '_'.join(ch_name.split()) + ".pdf"] = 0
-    im_pages = html.find("div", class_="container-chapter-reader").find_all("img")
+    links = html.find_all("div", class_="grid-item")
 
-    total_pgs = len(im_pages)
+    total_pgs = len(links)
 
-    for img_page in im_pages:
+    for img_link in links[:-2]:
         count = count + 1
-        
-        print(img_page.attrs['src'])
-        
+        # print(count)
+        # continue
+        img_page_data = get(base + img_link.find("a").attrs['href'])
+
+        page_html = BeautifulSoup(img_page_data.content,"html.parser")
+
+        img = page_html.find("div", class_="comix").find("img").attrs['src']
+
         if count < 10:
             count_str = "0" + str(count)
         else:
             count_str = str(count)
         
-        headers = {
-            "Host":"s61.mkklcdnv6tempv2.com",
-            "Referer":"https://readmanganato.com/"
-        }
+        # print(base + img)
+        # continue
+        c = get(base + img)
 
-        c = get(img_page.attrs['src'], headers=headers)
-        print(c)
-        im_name = directory + title + img_page.attrs['src'].split(sep="/")[-1]
+        im_name = directory + title + img.split(sep="/")[-1]
         
         with open(im_name, 'wb') as f:
             f.write(c.content)
@@ -79,15 +83,14 @@ def dl(url_):
         
         img_arr.append(im_name)
 
-        global_vars.update_status( (title + ' - ' + ch_name), [count, total_pgs, rel_location + '_'.join(title.split()) + '_' + ch_name + ".pdf", started])
+        # global_vars.update_status( (title + ' - ' + ch_name), [count, total_pgs, rel_location + '_'.join(title.split()) + '_' + ch_name + ".pdf", started])
     
-    #print(img_arr)
+    print(img_arr)
 
-    with open(manga_name + '_'.join(title.split()) + '_' + ch_name + ".pdf", "wb") as f:
+    with open(manga_name + '_'.join(title.split()) + '_' + title + ".pdf", "wb") as f:
         f.write(img2pdf.convert([i for i in img_arr if i.endswith(".jpg")]))
-        print('PDF Generated for', '_'.join(title.split()) + '_' + '_'.join(ch_name.split()) + ".pdf")
+        print('PDF Generated for', '_'.join(title.split()) + '_' + '_'.join(title.split()) + ".pdf")
 
     shutil.rmtree(directory)
 
-
-# dl('https://readmanganato.com/manga-vy951833/chapter-136')
+dl('https://eggporncomics.com/comics/37886/straight-line-to-love-ch4')
