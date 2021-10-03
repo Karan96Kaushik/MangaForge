@@ -3,6 +3,9 @@
 *.gif
 *.mp4
 *.sql
+*.spec
 Comix/*
 __pycache__/*
 pyenv/
+build/
+dist/
