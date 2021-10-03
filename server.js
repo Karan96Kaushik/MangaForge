@@ -23,7 +23,7 @@ app.post('/download', async (req, res) => {
 
 	let url = req.body.url
 
-	const dowloader = spawn('./downloaderBin', ['--url='+url]);
+	const dowloader = spawn('python3', ['downloaderBin.py', '--url='+url]);
 
 	dowloader.stdout.on('data'	, (data) => console.log(`stdout: ${data}`))
 	dowloader.stderr.on('data'	, (data) => console.log(`err: ${data}`))
