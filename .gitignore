@@ -9,3 +9,4 @@ __pycache__/*
 pyenv/
 build/
 dist/
+node_modules/
